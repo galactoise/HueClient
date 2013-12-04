@@ -4,22 +4,33 @@ var hueClient = {
 			
 			//define endpoints
 			this.rootEndpoint = "/api/";
-			this.consumerRootEndpoint = "/api/%s";
-			this.lightsByConsumerIdEndpoint = "/api/%s/lights";
+			this.fullStateByUsernameEndpoint = "/api/%s";
+			this.lightsByUsernameEndpoint = "/api/%s/lights";
 		},
 
 		
 		get: function(path){
-			var uri = controllerUrl + path;
-			alert(uri);
-			jQuery.ajax({
-				type: GET,
+			var uri = this.controllerUrl + path;
+			console.log("uri: " + uri);
+			var request = jQuery.ajax({
+				type: "GET",
 				dataType: "json",
-				url: uri
+				url: uri,
+				async: false
 			});
+			
+			return request;
 		},
 		
-		getLightsByConsumerId: function(consumerId){
-			var path = this.lightsByConsumerIdEndpoint.replace("%s",consumerId);
+		getLightsByUsername: function(username){
+			var path = this.lightsByUsernameEndpoint.replace("%s",username);
+			console.log("path: " + path);
+			return this.get(path);
+		},
+		
+		getFullStateByUsername: function(username){
+			var path = this.fullStateByUsernameEndpoint.replace("%s",username);
+			console.log("path: " + path);
+			return this.get(path);
 		}
-}
+};
