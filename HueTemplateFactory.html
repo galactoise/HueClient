@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Hue Template Factory</title>
+<script src="jquery-2.0.3.js" type="text/javascript"></script>
+<script src="jquery-ui-1.10.4.custom\js\jquery-ui-1.10.4.custom.js"
+	type="text/javascript"></script>
+<script src="HueProxyClient.js" type="text/javascript"></script>
+<script>
+  $(function() {
+    $( ".draggable" ).draggable({
+    	appendTo: "body",
+    	helper: "clone"
+    });
+    $( "#templateContainer" ).droppable({
+      drop: function( event, ui ) {
+        $( this )
+          .find( "p" )
+            .html( "Dropped!" );
+      }
+    });
+  });
+  </script>
+<style type="text/css">
+#container {
+	width: 100%;
+	height: 400px;
+}
+#stateObjects {
+	width: 49%;
+	height: 100%;
+	float: left;
+	border: 1px solid black;
+}
+#templateContainer {
+	width: 49%;
+	float: left;
+	border: 1px solid black;
+}
+</style>
+</head>
+<body>
+	<div id="container">
+		<div id="templateContainer"><p class="placeholder">No current states</p></div>
+		<div id="stateObjects">
+			<div id="lightStateUpdateObject" class="draggable">
+				<p>Light State Update Object</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
