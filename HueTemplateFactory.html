@@ -15,12 +15,16 @@
     });
     $( "#templateList" ).droppable({
       drop: function( event, ui ) {
-    	  var objectToMove = $(ui.helper.html());
-    	  console.log(objectToMove);
+    	  var objectToMove = $(ui.helper);
+    	  var clonedObject = objectToMove.clone();
+		  console.log(clonedObject);
+		  clonedObject.removeAttr("style");
+		  clonedObject.removeClass("ui-draggable ui-draggable-dragging")
+		  clonedObject.addClass("templateItemDropped");
         $( this )
           .find( "#placeholder" ).remove();
         
-        $( "<li></li>" ).append(objectToMove).appendTo(this);
+        $( "<li></li>" ).addClass("droppedLineItem").append(clonedObject).appendTo(this);
       }
     });
   });
@@ -36,11 +40,27 @@
 	float: left;
 	border: 1px solid black;
 }
+.templateItem:drag {
+	background-color: red;
+}
 #templateContainer {
 	width: 49%;
 	float: left;
 	border: 1px solid black;
 }
+#templateList{
+	list-style-type: none;
+}
+.templateItem{
+	transition: background-color 300ms linear 0s;
+}
+.templateItemDropped{
+	border: 2px dashed gray;
+	border-radius: 10px;
+	margin-top: 3px;
+	display: inline-block;
+}
+
 </style>
 </head>
 <body>
